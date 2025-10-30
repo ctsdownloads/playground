@@ -1,0 +1,42 @@
+---
+name: Validate Flatpaks
+on:
+  pull_request:
+    paths:
+      - 'custom/flatpaks/**'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Flatpak IDs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Flatpaks
+        run: |
+          #!/bin/bash
+          set -e
+          
+          echo "Validating flatpak IDs..."
+          
+          for file in custom/flatpaks/*.preinstall; do
+            [ -e "$file" ] || continue
+            echo "Checking $file"
+            
+            # Extract flatpak IDs from the file
+            ids=$(grep '^\[Flatpak Preinstall' "$file" | sed 's/\[Flatpak Preinstall \(.*\)\]/\1/')
+            
+            for id in $ids; do
+              echo "  Validating $id..."
+              # Check if the flatpak exists on Flathub
+              if ! curl -s "https://flathub.org/api/v2/appstream/$id" | grep -q "\"id\":\"$id\""; then
+                echo "  ❌ Error: $id not found on Flathub"
+                exit 1
+              fi
+              echo "  ✅ $id is valid"
+            done
+          done
+          
+          echo "All flatpak IDs are valid!"

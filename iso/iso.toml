@@ -1,0 +1,39 @@
+# ISO Configuration for ClarityOS
+# This file configures the bootc-image-builder to create bootable ISOs
+
+[customizations.installer]
+# Enable offline installation
+unattended = false
+
+[customizations.installer.kickstart]
+# Kickstart configuration for automated installation
+contents = """
+lang en_US.UTF-8
+keyboard us
+timezone America/New_York --utc
+rootpw --lock
+user --name=clarityos --groups=wheel --lock
+bootloader --location=mbr
+zerombr
+clearpart --all --initlabel
+autopart --type=btrfs
+network --bootproto=dhcp --device=link --activate
+reboot
+%packages
+@core
+%end
+"""
+
+[[customizations.user]]
+name = "clarityos"
+description = "ClarityOS User"
+groups = ["wheel"]
+
+[[filesystem.modifications.directories]]
+path = "/etc/pki/containers"
+
+[[filesystem.modifications.directories]]
+path = "/etc/containers/systemd"
+
+[[filesystem.modifications.directories]]
+path = "/var/roothome"

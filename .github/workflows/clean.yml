@@ -1,0 +1,23 @@
+---
+name: Clean old container images
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly on Sundays at 2am UTC
+  workflow_dispatch:
+
+jobs:
+  clean:
+    name: Delete old container images
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Delete old images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'clarity-os'
+          package-type: 'container'
+          min-versions-to-keep: 10
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '^(stable|latest)$'
