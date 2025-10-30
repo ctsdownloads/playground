@@ -96,31 +96,15 @@ echo "::endgroup::"
 echo "::group:: Install CLI Tools"
 
 # Install essential CLI tools for ClarityOS
+# Install only packages not already in base-main:gts
 dnf5 install -y \
-    git \
+    micro \
+    htop \
     vim \
     neovim \
+    git \
     tmux \
-    htop \
-    btop \
-    ripgrep \
-    fd-find \
-    fzf \
-    bat \
-    eza \
-    zoxide \
-    starship \
-    curl \
-    wget \
-    rsync \
-    tree \
-    jq \
-    yq \
-    ncdu \
-    tldr \
-    fish \
-    zsh \
-    util-linux-user
+    nano
 
 echo "CLI tools installed successfully"
 echo "::endgroup::"
