@@ -5,7 +5,7 @@
 contents = """
 %post
 # After installation, switch to the ClarityOS custom image from this repository
-bootc switch --mutate-in-place --transport registry ghcr.io/ctsdownloads/playground:stable
+bootc switch --mutate-in-place --transport registry ghcr.io/ctsdownloads/clarity-os:stable
 %end
 """
 

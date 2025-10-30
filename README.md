@@ -30,11 +30,13 @@ A custom Linux distribution featuring the COSMIC Desktop Environment, built on U
 - kitty - GPU-accelerated terminal
 
 ### Flatpak Applications
-- **Development**: Bazaar, COSMIC Tweaks
+- **Development**: Bazaar
 - **System**: Warehouse, Flatseal
 - **Office**: LibreOffice
 - **Media**: Celluloid (video player), Color Picker (gcolor3)
 - **Utilities**: Loupe (image viewer), Papers (document viewer), Baobab (disk usage), FileRoller (archive manager)
+
+_Note: COSMIC Tweaks functionality is built into COSMIC Settings, which is installed as part of the desktop environment._
 
 ## Installation
 
@@ -49,7 +51,7 @@ A custom Linux distribution featuring the COSMIC Desktop Environment, built on U
 If you're already running a bootc-compatible system:
 
 ```bash
-sudo bootc switch ghcr.io/ctsdownloads/playground:stable
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
 sudo systemctl reboot
 ```
 

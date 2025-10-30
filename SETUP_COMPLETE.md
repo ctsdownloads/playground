@@ -63,8 +63,8 @@ This document summarizes the ClarityOS implementation based on the finpilot temp
 - FileRoller - Archive manager
 
 ❌ **Not Included** (not available as flatpaks):
-- COSMIC Tweaks - Integrated in COSMIC Settings
-- COSMIC Money - Not yet released
+- COSMIC Tweaks - Functionality integrated into COSMIC Settings (installed with desktop)
+- COSMIC Money - Not yet released on Flathub
 
 ### Custom Branding
 - Custom os-release file with ClarityOS identity
@@ -91,7 +91,7 @@ This document summarizes the ClarityOS implementation based on the finpilot temp
 2. Download the ISO from GitHub Actions artifacts, or
 3. Rebase existing system:
    ```bash
-   sudo bootc switch ghcr.io/ctsdownloads/playground:stable
+   sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
    sudo systemctl reboot
    ```
 
