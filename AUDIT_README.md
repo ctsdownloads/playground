@@ -58,8 +58,24 @@ unattended = false
 #
 # The [customizations.installer] section is NOT supported by bootc-image-builder.
 # Setting "unattended = false" has NO EFFECT on BIB-generated ISOs.
-# ...
-(See file for complete documentation)
+#
+# For interactive installation, use one of these alternatives:
+# 1. Boot a live USB (Fedora/Universal Blue) and run:
+#    sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+# 2. Install base Fedora first, then switch to ClarityOS with bootc switch
+#
+# See INSTALLER_AUDIT.md for complete analysis and details.
+#
+# Valid bootc-image-builder configuration sections:
+# [[customizations.user]] - Pre-configure user accounts
+# [[filesystem.modifications]] - Customize filesystem
+#
+# Example: Create a default user (commented out by default)
+# [[customizations.user]]
+# name = "clarityos"
+# description = "ClarityOS User"
+# password = "$6$rounds=4096$..." # Use: openssl passwd -6
+# groups = ["wheel"]
 ```
 
 ### 2. Documentation Updated
@@ -135,6 +151,6 @@ Accept this as the correct behavior or consider using alternative ISO building t
 
 ---
 
-**Audit Completed:** 2025-10-30  
-**Auditor:** GitHub Copilot  
+**Audit Completed:** October 30, 2025  
+**Auditor:** GitHub Copilot Workspace  
 **Status:** ✅ Complete
