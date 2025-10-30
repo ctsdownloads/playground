@@ -47,23 +47,48 @@ echo "::group:: Install COSMIC Desktop from Fedora 43"
 
 # Install COSMIC Desktop Environment from Fedora 43 repositories
 # COSMIC is System76's new desktop written in Rust
-dnf5 install -y \
-    cosmic-session \
-    cosmic-greeter \
-    cosmic-comp \
-    cosmic-panel \
-    cosmic-launcher \
-    cosmic-applets \
-    cosmic-settings \
-    cosmic-files \
-    cosmic-edit \
-    cosmic-term \
-    cosmic-workspaces \
-    cosmic-bg \
-    cosmic-osd \
-    cosmic-screenshot \
-    cosmic-notifications \
-    xdg-desktop-portal-cosmic
+# Note: If COSMIC is not yet in Fedora 43 main repos, it will be installed from COPR
+
+# Check if COSMIC packages are available, if not, enable COPR
+if ! dnf5 list cosmic-session &>/dev/null; then
+    echo "COSMIC not in main repos, enabling COPR repository"
+    copr_install_isolated "ryanabx/cosmic-epoch" \
+        cosmic-session \
+        cosmic-greeter \
+        cosmic-comp \
+        cosmic-panel \
+        cosmic-launcher \
+        cosmic-applets \
+        cosmic-settings \
+        cosmic-files \
+        cosmic-edit \
+        cosmic-term \
+        cosmic-workspaces \
+        cosmic-bg \
+        cosmic-osd \
+        cosmic-screenshot \
+        cosmic-notifications \
+        xdg-desktop-portal-cosmic
+else
+    # Install from main Fedora repos
+    dnf5 install -y \
+        cosmic-session \
+        cosmic-greeter \
+        cosmic-comp \
+        cosmic-panel \
+        cosmic-launcher \
+        cosmic-applets \
+        cosmic-settings \
+        cosmic-files \
+        cosmic-edit \
+        cosmic-term \
+        cosmic-workspaces \
+        cosmic-bg \
+        cosmic-osd \
+        cosmic-screenshot \
+        cosmic-notifications \
+        xdg-desktop-portal-cosmic
+fi
 
 echo "COSMIC Desktop installed successfully"
 echo "::endgroup::"

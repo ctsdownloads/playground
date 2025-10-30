@@ -216,6 +216,7 @@ ClarityOS is built using several modern technologies:
 
 ## Documentation
 
+- [Setup Guide](SETUP.md) - Complete setup and configuration guide
 - [Build System](build/README.md) - Details on the build process
 - [Flatpak Management](custom/flatpaks/README.md) - Managing applications
 - [Justfile Commands](Justfile) - Available build and test commands
