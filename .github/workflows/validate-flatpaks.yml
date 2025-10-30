@@ -1,0 +1,42 @@
+name: Validate Flatpaks
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    paths:
+      - "custom/flatpaks/**"
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flathub
+        shell: bash
+        run: |
+          sudo apt install -y flatpak
+          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+      - name: Validate Flatpaks
+        shell: bash
+        run: |
+          echo "Validating flatpak preinstall files in custom/flatpaks/ directory..."
+
+          set -xeuo pipefail
+
+          # Find .preinstall files and extract flatpak IDs
+          find "custom/flatpaks" -name "*.preinstall" -print0 | \
+            while IFS= read -r -d '' preinstall_file ; do \
+              echo "::group:: ===$(basename "$preinstall_file")==="
+              # Extract flatpak IDs from [Flatpak Preinstall ID] sections
+              grep -oP '\[Flatpak Preinstall \K[^\]]+' "$preinstall_file" | \
+                while read -r flatpak_id ; do \
+                  echo "Checking: ${flatpak_id}"
+                  flatpak remote-info --user flathub "${flatpak_id}" || echo "Warning: ${flatpak_id} not found on Flathub"
+                done
+              echo "::endgroup::"
+            done
+
+          echo "Flatpak validation complete"
