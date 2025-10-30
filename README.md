@@ -2,8 +2,6 @@
 
 A beautiful, modern Linux desktop operating system featuring System76's COSMIC Desktop Environment, built on Universal Blue's reliable foundation. ClarityOS combines cutting-edge desktop technology with enterprise-grade stability.
 
-![ClarityOS](https://avatars.githubusercontent.com/u/120078124?s=200&v=4)
-
 ## Features
 
 ### 🌟 COSMIC Desktop Environment
