@@ -269,3 +269,87 @@ Consider using traditional Fedora image building tools:
 **ROOT CAUSE:** The `[customizations.installer]` section in `iso/iso.toml` is not a valid bootc-image-builder configuration, so BIB uses its default behavior: automated/unattended ISO installation.
 
 **SOLUTION REQUIRED:** Implement proper BIB configuration or use alternative methods to enable interactive Anaconda installation.
+
+---
+
+## Recommended Fix (Minimal Change)
+
+### Step 1: Remove Invalid Configuration
+
+**File:** `iso/iso.toml`  
+**Action:** Remove the ineffective `[customizations.installer]` section
+
+**Current (INCORRECT):**
+```toml
+# ISO Configuration for ClarityOS
+[customizations.installer]
+unattended = false
+```
+
+**Proposed (MINIMAL):**
+```toml
+# ISO Configuration for ClarityOS
+# Note: bootc-image-builder creates automated installation ISOs by design.
+# For interactive installation, consider using "bootc switch" from a live USB
+# or a different ISO building tool.
+```
+
+### Step 2: Update Documentation
+
+**Files to Update:**
+- `README.md` - Clarify ISO installation is automated
+- `SETUP.md` - Add note about automated installation behavior
+- `INSTALLER_AUDIT.md` - This document serves as the detailed explanation
+
+**README.md changes:**
+```markdown
+#### Option 2: Install from ISO
+
+1. Download the latest ISO from the [Releases](https://github.com/ctsdownloads/clarity-os/releases) page
+2. Flash to USB drive using [Fedora Media Writer](https://flathub.org/apps/org.fedoraproject.MediaWriter) or Ventoy
+3. Boot from USB - **Note: Installation is automated** (see INSTALLER_AUDIT.md for details)
+
+**Alternative:** Boot a live USB (Fedora, Universal Blue, etc.) and use `bootc switch` for interactive setup.
+```
+
+### Step 3: Alternative Installation Method
+
+For users who want interactive installation, recommend:
+
+**Option A: Use `bootc switch` from Live USB**
+```bash
+# Boot any Fedora/Universal Blue live USB
+# Open terminal and run:
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+```
+
+**Option B: Use traditional Fedora installation**
+```bash
+# Install Fedora first
+# Then switch to ClarityOS:
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+sudo systemctl reboot
+```
+
+---
+
+## Why This is the Right Fix
+
+1. **Minimal change** - Only removes non-functional code
+2. **Honest** - Doesn't pretend to support interactive installation
+3. **Provides alternatives** - Offers working solutions for users
+4. **Correct** - Uses bootc as designed
+5. **No breaking changes** - The ISO never worked interactively anyway
+
+---
+
+## Future Enhancements (Optional)
+
+If interactive installation is truly required:
+
+1. **Research BIB kickstart support** - Check if `--kickstart` flag exists
+2. **Create custom kickstart** - Write a kickstart file with interactive directives
+3. **Test alternative ISO builders** - Evaluate `lorax` or `anaconda-image-builder`
+4. **Consider live ISO** - Create a live ISO with installation tool (more complex)
+
+However, the bootc workflow is designed for `bootc switch`, not traditional ISO installation.

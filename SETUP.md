@@ -233,25 +233,69 @@ Configuration files:
 - `iso/iso.toml` - ISO-specific configuration
 - `iso/disk.toml` - Disk layout for VM images
 
+### ⚠️ Important: Automated Installation
+
+**ISOs created by bootc-image-builder perform AUTOMATED installation.**
+
+The installer will:
+- Automatically detect and use the first available disk
+- Automatically partition and format the disk
+- Install ClarityOS without user interaction
+- Reboot when complete
+
+**This is by design** - bootc-image-builder creates deployment ISOs, not interactive installers.
+
+See `INSTALLER_AUDIT.md` for complete technical details.
+
 ### ISO Configuration Options
 
-Edit `iso/iso.toml` to customize:
-- Default user and password
-- Keyboard layout
-- Timezone
-- Network configuration
-- Partition layout
+Edit `iso/iso.toml` to customize the **image** (not the installer behavior):
+
+**Valid configurations:**
+- User accounts (pre-configured)
+- Filesystem modifications
+- Hostname and system settings
 
 Example:
 ```toml
-[customizations.installer]
-unattended = false
+# ISO Configuration for ClarityOS
+# Note: Installation is automated by bootc-image-builder
 
 [[customizations.user]]
 name = "clarityos"
 description = "ClarityOS User"
+password = "$6$rounds=4096$..."  # Generate with: openssl passwd -6
 groups = ["wheel"]
 ```
+
+**Invalid configurations** (silently ignored by bootc-image-builder):
+```toml
+[customizations.installer]  # ❌ Not supported by BIB
+unattended = false          # ❌ Has no effect
+```
+
+### Interactive Installation Alternatives
+
+If you need interactive installation with manual partitioning and user creation:
+
+**Option 1: Use `bootc switch` from Live USB (Recommended)**
+```bash
+# Boot any Fedora or Universal Blue live USB
+# Open terminal:
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+sudo systemctl reboot
+```
+
+**Option 2: Install base Fedora first**
+```bash
+# Install Fedora interactively
+# After installation, switch to ClarityOS:
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+sudo systemctl reboot
+```
+
+**Option 3: Use pre-configured user**
+Edit `iso/iso.toml` to add a default user (see example above), then rebuild the ISO.
 
 ## Deployment
 

@@ -49,11 +49,20 @@ sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
 sudo systemctl reboot
 ```
 
-#### Option 2: Install from ISO
+#### Option 2: Install from ISO (Automated)
+
+**⚠️ Note:** The ISO performs automated installation (no user prompts). See `INSTALLER_AUDIT.md` for details.
 
 1. Download the latest ISO from the [Releases](https://github.com/ctsdownloads/clarity-os/releases) page
 2. Flash to USB drive using [Fedora Media Writer](https://flathub.org/apps/org.fedoraproject.MediaWriter) or Ventoy
-3. Boot from USB and follow installation prompts
+3. Boot from USB - installation proceeds automatically
+4. System reboots after installation completes
+
+**For interactive installation:** Boot a live USB (Fedora/Universal Blue) and use:
+```bash
+sudo bootc switch ghcr.io/ctsdownloads/clarity-os:stable
+sudo systemctl reboot
+```
 
 ### First Boot
 
