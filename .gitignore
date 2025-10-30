@@ -1,0 +1,39 @@
+# .gitignore for ClarityOS
+
+# Build artifacts
+_build/
+*_build*
+output/
+*.qcow2
+*.raw
+*.iso
+
+# Temporary files
+*.tmp
+*.swp
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Build system
+previous.manifest.json
+changelog.md
+output.env
+
+# Container runtime
+.containerenv
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Secrets (never commit these!)
+cosign.key
+*.key
+*.pem
+
+# Local configuration
+.env.local

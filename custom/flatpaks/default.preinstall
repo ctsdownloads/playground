@@ -1,0 +1,46 @@
+# ClarityOS Default Flatpak applications
+# These will be installed on first boot
+# Format: INI file with [Flatpak Preinstall NAME] groups
+# See: https://docs.flatpak.org/en/latest/flatpak-command-reference.html#flatpak-preinstall
+
+# COSMIC Applications
+[Flatpak Preinstall com.system76.CosmicTweaks]
+Branch=stable
+
+# System Utilities
+[Flatpak Preinstall io.github.kolunmi.Bazaar]
+Branch=stable
+
+[Flatpak Preinstall io.github.flattool.Warehouse]
+Branch=stable
+
+[Flatpak Preinstall com.github.tchx84.Flatseal]
+Branch=stable
+
+# Office Suite
+[Flatpak Preinstall org.libreoffice.LibreOffice]
+Branch=stable
+
+# Media Applications
+[Flatpak Preinstall io.github.celluloid_player.Celluloid]
+Branch=stable
+
+# Graphics & Utilities
+[Flatpak Preinstall nl.hjdskes.gcolor3]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.Loupe]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.Papers]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.baobab]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.FileRoller]
+Branch=stable
+
+# Finance
+[Flatpak Preinstall com.system76.CosmicMoney]
+Branch=stable

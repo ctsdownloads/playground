@@ -1,0 +1,8 @@
+[[filesystem.modifications.directories]]
+path = "/etc/pki/containers"
+
+[[filesystem.modifications.directories]]
+path = "/etc/containers/systemd"
+
+[[filesystem.modifications.directories]]
+path = "/var/roothome"
