@@ -37,6 +37,8 @@ Essential applications pre-configured via Flatpak:
 
 ## Quick Start
 
+📚 **New to ClarityOS?** Check out the [Quick Start Guide](QUICKSTART.md) for a fast introduction!
+
 ### Installation
 
 #### Option 1: Rebase from existing Fedora/Universal Blue system
