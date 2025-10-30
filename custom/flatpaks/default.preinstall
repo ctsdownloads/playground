@@ -6,14 +6,14 @@
 [Flatpak Preinstall io.github.kolunmi.Bazaar]
 Branch=stable
 
-[Flatpak Preinstall com.system76.CosmicTweaks]
-Branch=stable
-
 [Flatpak Preinstall io.github.flattool.Warehouse]
 Branch=stable
 
 [Flatpak Preinstall com.github.tchx84.Flatseal]
 Branch=stable
+
+# Note: COSMIC Tweaks will be available through COSMIC Settings in the COSMIC Desktop
+# which is installed via the build script, not as a separate flatpak
 
 # Office Suite
 [Flatpak Preinstall org.libreoffice.LibreOffice]
